@@ -1,3 +1,4 @@
+# config/routes.rb
 Rails.application.routes.draw do
   # Home page
   root 'places#index'
@@ -12,8 +13,4 @@ Rails.application.routes.draw do
   resources :places do
     resources :entries, only: [:new, :create, :show]
   end
-
-  # Add additional routes for actions that need to be handled explicitly
-  # For example, the logout route explicitly needed for session destruction
-  delete 'logout', to: 'sessions#destroy', as: :logout
 end

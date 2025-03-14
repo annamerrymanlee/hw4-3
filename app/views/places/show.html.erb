@@ -35,13 +35,14 @@
     <p class="text-center">No entries for this place yet.</p>
   <% end %>
 
-  <!-- Link to create a new entry for this place -->
-  <div class="text-center mt-4">
-    <%= link_to 'New Entry', new_entry_path(place_id: @place.id), class: 'btn btn-primary' %>
-  </div>
+ <!-- Link to create a new entry for this place -->
+<div class="text-center mt-4">
+  <%= link_to 'New Entry', new_place_entry_path(@place), class: 'btn btn-primary' %>
+</div>
 
-  <!-- Link back to all places -->
-  <div class="text-center mt-2">
-    <%= link_to 'Back to All Places', places_path, class: 'btn btn-secondary' %>
-  </div>
+
+<!-- Link back to all places -->
+<div class="text-center mt-4">
+  <%= link_to 'Back to All Places', places_path, class: 'btn btn-secondary' %>
+</div>
 </div>

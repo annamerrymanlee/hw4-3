@@ -11,7 +11,7 @@ class EntriesController < ApplicationController
   # Create a new entry and associate it with a place
   def create
     @entry = @place.entries.build(entry_params)
-    @entry.user = current_user
+    @entry.user = current_user  # Associate the current user with the entry
 
     if @entry.save
       redirect_to place_path(@place), notice: 'Entry was successfully created.'
@@ -35,7 +35,7 @@ class EntriesController < ApplicationController
 
   # Strong parameters for entry form submission
   def entry_params
-    params.require(:entry).permit(:title, :description, :occurred_on, :image)
+    params.require(:entry).permit(:title, :description, :occurred_on, :image)  # Make sure to permit the image attribute
   end
 
   # Ensure a user is authenticated
