@@ -19,6 +19,6 @@ class SessionsController < ApplicationController
   # Handle user logout
   def destroy
     session[:user_id] = nil
-    redirect_to login_path, notice: 'Successfully logged out.'
+    redirect_to root_path, notice: 'Successfully logged out.'  # Redirect to the root path (home page) after logout
   end
 end

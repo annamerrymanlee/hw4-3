@@ -34,7 +34,7 @@
             <span class="navbar-text">
               Welcome, <%= current_user.first_name %>
             </span>
-            <%= link_to 'Logout', logout_path, method: :delete, class: 'nav-link' %>
+            <%= link_to 'Logout', session_path, method: :delete, class: 'nav-link' %> <!-- Use session_path for logout -->
           <% else %>
             <!-- If the user is not logged in, show Login and Signup links -->
             <%= link_to 'Login', login_path, class: 'nav-link' %>
