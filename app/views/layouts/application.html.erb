@@ -1,25 +1,53 @@
+<!-- app/views/layouts/application.html.erb -->
 <!DOCTYPE html>
 <html>
   <head>
     <title>Tacostagram Final</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <link rel="stylesheet" href="/stylesheets/application.css">
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   </head>
 
   <body>
-    <div>
-      <%= flash["notice"] %>
-    </div>
-    <div>
-      <a href="/">Home</a>
-      <a href="/logout">Logout</a>
-      <a href="/login">Login</a>
-      <a href="/users/new">Signup</a>
+    <div class="container">
+      <!-- Display flash messages if any -->
+      <% if flash["notice"] %>
+        <div class="alert alert-success">
+          <%= flash["notice"] %>
+        </div>
+      <% elsif flash["alert"] %>
+        <div class="alert alert-danger">
+          <%= flash["alert"] %>
+        </div>
+      <% end %>
+
+      <!-- Navbar with conditional links for logged-in users -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Home</a>
+        <div class="navbar-nav ml-auto">
+          <% if current_user %>
+            <!-- If the user is logged in, show their name and a logout link -->
+            <span class="navbar-text">
+              Welcome, <%= current_user.first_name %>
+            </span>
+            <%= link_to 'Logout', logout_path, method: :delete, class: 'nav-link' %>
+          <% else %>
+            <!-- If the user is not logged in, show Login and Signup links -->
+            <%= link_to 'Login', login_path, class: 'nav-link' %>
+            <%= link_to 'Signup', new_user_path, class: 'nav-link' %>
+          <% end %>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <%= yield %>
     </div>
 
-    <%= yield %>
+    <!-- Add Bootstrap JS and dependencies -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

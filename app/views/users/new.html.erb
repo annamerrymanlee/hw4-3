@@ -1,17 +1,70 @@
-<h1>New User Account</h1>
+<!-- app/views/users/new.html.erb -->
+<h1>Create an Account</h1>
 
-<form action="/users" method="post">
-  <p>
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username">
-  </p>
-  <p>
-    <label for="email">Email</label>
-    <input type="text" name="email" id="email">
-  </p>
-  <p>
-    <label for="password">Password</label>
-    <input type="text" name="password" id="password">
-  </p>
-  <button>Signup</button>
-</form>
+<div class="container">
+  <%= form_with model: @user, local: true, class: "form" do |form| %>
+    <!-- First Name input -->
+    <div class="mb-3">
+      <%= form.label :first_name, class: "form-label" %>
+      <%= form.text_field :first_name, class: "form-control", placeholder: "Enter your first name" %>
+      <% if @user.errors[:first_name].any? %>
+        <div class="text-danger">
+          <%= @user.errors[:first_name].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Last Name input -->
+    <div class="mb-3">
+      <%= form.label :last_name, class: "form-label" %>
+      <%= form.text_field :last_name, class: "form-control", placeholder: "Enter your last name" %>
+      <% if @user.errors[:last_name].any? %>
+        <div class="text-danger">
+          <%= @user.errors[:last_name].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Email input -->
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control", placeholder: "Enter your email" %>
+      <% if @user.errors[:email].any? %>
+        <div class="text-danger">
+          <%= @user.errors[:email].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Password input -->
+    <div class="mb-3">
+      <%= form.label :password, class: "form-label" %>
+      <%= form.password_field :password, class: "form-control", placeholder: "Create a password" %>
+      <% if @user.errors[:password].any? %>
+        <div class="text-danger">
+          <%= @user.errors[:password].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Password confirmation input -->
+    <div class="mb-3">
+      <%= form.label :password_confirmation, class: "form-label" %>
+      <%= form.password_field :password_confirmation, class: "form-control", placeholder: "Confirm your password" %>
+      <% if @user.errors[:password_confirmation].any? %>
+        <div class="text-danger">
+          <%= @user.errors[:password_confirmation].join(", ") %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Submit button -->
+    <div class="mb-3">
+      <%= form.submit 'Sign Up', class: "btn btn-primary w-100" %>
+    </div>
+  <% end %>
+</div>
+
+<p class="text-center">
+  Already have an account? <%= link_to 'Log In', login_path %>
+</p>

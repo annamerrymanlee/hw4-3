@@ -1,16 +1,27 @@
 <h1><%= @place["name"] %></h1>
 
 <h2>My Entries</h2>
+
+<!-- Loop through entries that belong to the current user -->
 <% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
+  <% if entry.user_id == current_user.id %> <!-- Only show entries for the logged-in user -->
+    <div class="entry">
+      <h3><%= entry["title"] %></h3>
+      <h4><%= entry["occurred_on"] %></h4>
+      <p><%= entry["description"] %></p>
+      <% if entry.image.attached? %> <!-- Show image if attached -->
+        <%= image_tag(entry.image) %>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>
 
+<!-- Link to create a new entry for this place -->
 <p>
   <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
 </p>
 
+<!-- Link back to all places -->
 <p>
   <a href="/places">Back to All Places</a>
 </p>

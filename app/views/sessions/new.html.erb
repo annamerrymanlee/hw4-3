@@ -1,6 +1,29 @@
 <h1>Login</h1>
 
-<form action="/sessions" method="post">
+<%= form_with url: login_path, local: true do |form| %>
+  <!-- Email input -->
+  <div class="mb-3">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.text_field :email, class: "form-control", placeholder: "Enter your email", autofocus: true %>
+    <% if flash[:alert] %>
+      <div class="text-danger">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+  </div>
 
-  <button>Login<button>
-</form>
+  <!-- Password input -->
+  <div class="mb-3">
+    <%= form.label :password, class: "form-label" %>
+    <%= form.password_field :password, class: "form-control", placeholder: "Enter your password" %>
+  </div>
+
+  <!-- Submit button -->
+  <div class="mb-3">
+    <%= form.submit 'Login', class: "btn btn-primary w-100" %>
+  </div>
+<% end %>
+
+<p class="text-center">
+  Don't have an account? <%= link_to 'Sign up', new_user_path %>
+</p>
