@@ -6,9 +6,9 @@ class PlacesController < ApplicationController
     @places = Place.all
   end
 
-  # Show a specific place and its associated entries
+  # Show a specific place and its associated entries for the current user
   def show
-    @entries = @place.entries  # Use association rather than raw SQL
+    @entries = @place.entries.where(user: current_user)  # Filter entries for the current user
   end
 
   # Display the form to create a new place

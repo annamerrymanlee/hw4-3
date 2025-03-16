@@ -15,33 +15,34 @@
   <body>
     <div class="container">
       <!-- Display flash messages if any -->
-      <% if flash["notice"] %>
+      <% if flash[:notice] %>
         <div class="alert alert-success">
-          <%= flash["notice"] %>
+          <%= flash[:notice] %>
         </div>
-      <% elsif flash["alert"] %>
+      <% elsif flash[:alert] %>
         <div class="alert alert-danger">
-          <%= flash["alert"] %>
+          <%= flash[:alert] %>
         </div>
       <% end %>
 
-      <!-- Navbar with conditional links for logged-in users -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Home</a>
-        <div class="navbar-nav ml-auto">
-          <% if current_user %>
-            <!-- If the user is logged in, show their name and a logout link -->
-            <span class="navbar-text">
-              Welcome, <%= current_user.first_name %>
-            </span>
-            <%= link_to 'Logout', session_path, method: :delete, class: 'nav-link' %> <!-- Use session_path for logout -->
-          <% else %>
-            <!-- If the user is not logged in, show Login and Signup links -->
-            <%= link_to 'Login', login_path, class: 'nav-link' %>
-            <%= link_to 'Signup', new_user_path, class: 'nav-link' %>
-          <% end %>
-        </div>
-      </nav>
+<!-- Navbar with conditional links for logged-in users -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Home</a>
+  <div class="navbar-nav ml-auto">
+    <% if current_user %>
+      <!-- If the user is logged in, show their name and a logout link -->
+      <span class="navbar-text">
+        Welcome, <%= current_user.first_name %>
+      </span>
+      <%= link_to 'Logout', session_path, method: :delete, class: 'nav-link' %> <!-- Corrected logout path -->
+    <% else %>
+      <!-- If the user is not logged in, show Login and Signup links -->
+      <%= link_to 'Login', new_session_path, class: 'nav-link' %>
+      <%= link_to 'Signup', new_user_path, class: 'nav-link' %>
+    <% end %>
+  </div>
+</nav>
+
 
       <!-- Main content -->
       <%= yield %>

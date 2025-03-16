@@ -15,8 +15,7 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
   database: tacogram_final_production
-  username: annamerrymanlee  # Replace with your database username for production
-  password: <%= ENV["TACOGRAM_FINAL_DATABASE_PASSWORD"] %>  # Use the production password from environment variables
-  host: <%= ENV["DATABASE_HOST"] %>  # Optional, set this if your database is hosted somewhere else
-  port: 5432  # Default PostgreSQL port
+  username: tacogram_final
+  password: <%= ENV["TACOGRAM_FINAL_DATABASE_PASSWORD"] %>

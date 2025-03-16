@@ -8,10 +8,10 @@
   <h2 class="mb-4">My Entries</h2>
 
   <!-- Display entries if there are any -->
-  <% if @entries.any? %>
+  <% if @place.entries.any? %>
     <div class="row">
       <!-- Loop through entries and display each one -->
-      <% @entries.each do |entry| %>
+      <% @place.entries.each do |entry| %>
         <% if entry.user == current_user %> <!-- Only show entries for the logged-in user -->
           <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
@@ -20,9 +20,9 @@
                 <h4 class="card-subtitle mb-2 text-muted"><%= entry.occurred_on %></h4>
                 <p class="card-text"><%= entry.description %></p>
 
-                <!-- Show image if attached -->
-                <% if entry.image.attached? %>
-                  <%= image_tag(entry.image, class: 'img-fluid') %>
+                <!-- Show uploaded image if attached -->
+                <% if entry.uploaded_image.attached? %>
+                  <%= image_tag(url_for(entry.uploaded_image), class: 'img-fluid') %>
                 <% end %>
               </div>
             </div>
@@ -35,14 +35,13 @@
     <p class="text-center">No entries for this place yet.</p>
   <% end %>
 
- <!-- Link to create a new entry for this place -->
-<div class="text-center mt-4">
-  <%= link_to 'New Entry', new_place_entry_path(@place), class: 'btn btn-primary' %>
-</div>
+  <!-- Link to create a new entry for this place -->
+  <div class="text-center mt-4">
+    <%= link_to 'New Entry', new_place_entry_path(@place), class: 'btn btn-primary' %>
+  </div>
 
-
-<!-- Link back to all places -->
-<div class="text-center mt-4">
-  <%= link_to 'Back to All Places', places_path, class: 'btn btn-secondary' %>
-</div>
+  <!-- Link back to all places -->
+  <div class="text-center mt-4">
+    <%= link_to 'Back to All Places', places_path, class: 'btn btn-secondary' %>
+  </div>
 </div>
